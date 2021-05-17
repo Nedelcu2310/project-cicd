@@ -1,0 +1,37 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle # Name of the workflow (basically describe what this workflow does)
+
+on: #This section is for events, basically define events, and when they are triggered they are following a workflow.
+  push: # everytime someone pushed to main branch, we want to trigger a workflow
+    branches: [ main ]
+  pull_request: # everytime a pull request gets created with main branch as a target, the workflow will be triggered
+    branches: [ main ]
+
+jobs: # those are the jobs, the workflows that will happen when we trigger an event
+  build-java:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2 #whenever we want to build an application or run tests
+# we need to checkout the repository or the code first
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1 #basiclly it sets up your environment, with java and the verion u specify
+      with:
+        java-version: 1.8 #so, it installs java version 1.8
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew #runs a command line command, changes the permissions of gradle file
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
+#    - name: Build and Push Docker Image
+#      uses: mr-smithers-excellent/docker-build-push@v4
+#     with:
+#       image: nanajanashia/demo-app
+#       registry: docker.io
+#       username: ${{ secrets.DOCKER_USERNAME }}
+#       password: ${{ secrets.DOCKER_PASSWORD }}

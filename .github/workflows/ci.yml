@@ -15,7 +15,7 @@ jobs: # those are the jobs, the workflows that will happen when we trigger an ev
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-lastest]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
     
     steps:
     - uses: actions/checkout@v2 #whenever we want to build an application or run tests
